@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #fff0f5;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px;
+            background: #ffe6f2;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* animation: bounce;
+            animation-duration: 2s;  */
+        }
+        .hidden {
+            display: none;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        input {
+            border: 2px solid #d63384;
+        }
+        button {
+            background-color: #d63384;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .yes-btn {
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        #videoContainer video {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #ffc0cb;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+    </style>
+      <link rel="stylesheet" href="s.css">
+</head>
+<body>
+    <audio id="background-music" autoplay loop>
+        <source src="/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="animate__animated animate__bounce animate__slow container hidden" id="passwordPage">
+        <h2>Enter Password</h2>
+        <input type="password" id="passwordInput">
+        <button onclick="checkPassword()">ตกลง</button>
+        <p id="hint" class="hidden">คิดดีๆ...😡</p>
+    </div>
+
+    <div class="animate__animated animate__jackInTheBox animate__slow container hidden" id="valentinePage">
+        <h2>Will you be my valentine?</h2>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+        </div>
+        <button class="yes-btn" onclick="startCountdown()">Yes</button>
+        <button class="no-btn" onclick="handleNoClick()">No</button>
+    </div>
+
+    <div class="animate__animated animate__fadeInDown animate__slow container hidden" id="countdownPage">
+        <h2>Get ready for Our Memories</h2>
+        <p>Starting in <span id="countdown">10</span> seconds...</p>
+    </div>
+
+    <div class="animate__animated animate__fadeIn animate__slow" id="memoryPage">
+        <div class="whoIsWatching">
+            <div class="logo-section">
+                <!-- <a href="#"><img src="images/logo.png" alt="logo"></a> -->
+            </div>
+    
+            <div class="main-div">
+                <h1>Our Memories💕</h1>
+                <div class="memberDiv"></div>
+                <button class="manageProfile" onclick="goToEnd()">Next</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="animate__animated animate__zoomIn animate__slow container hidden" id="endPage">
+        <h2>Happy Valentine's Day!</h2>
+        <div class="slider">
+            <div class="list">
+                <div class="item">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/1c8349eb865bfc570.md.png" alt="image1">
+                </div>
+                <div class="item">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/2905cddb3e9c53258.md.png" alt="image2">
+                </div>
+                <div class="item">
+                    <img src="https://img2.pic.in.th/pic/3f45834e93df97f52.md.png" alt="image3">
+                </div>
+                <div class="item">
+                    <img src="https://img2.pic.in.th/pic/4f31031bda6576ae6.md.png" alt="image4">
+                </div>
+                <div class="item">
+                    <img src="https://img2.pic.in.th/pic/57c6f309504e29bfb.md.png" alt="image5">
+                </div>
+                <div class="item">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/637fc510578962276.md.png" alt="image5">
+                </div>
+            </div>
+            <!--button prev and next-->
+            <div class="buttons">
+                <button id="prev"><</button>
+            <button id="next">></button>
+            </div>
+            <!--Dots (if 5 items => 5 dots)-->
+            <ul class="dots">
+               <li class="active"></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li> 
+               <li></li> 
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            let password = document.getElementById("passwordInput").value;
+            if (password === "1234") {
+                document.getElementById("passwordPage").classList.add("hidden");
+                document.getElementById("valentinePage").classList.remove("hidden");
+            } else {
+                document.getElementById("hint").classList.remove("hidden");
+            }
+        }
+
+        const messages = [
+            "คุณแน่ใจไหม?",
+            "แน่ใจจริงๆ เหรอ??",
+            "คุณมั่นใจแน่นะ?",
+            "กวางน้อยได้โปรด...",
+            "ลองคิดดูอีกทีสิ!",
+            "ถ้าคุณปฏิเสธ ฉันจะเสียใจมาก...",
+            "ฉันจะเสียใจมากๆ...",
+            "ฉันจะเสียใจมากกกก...",
+            "โอเค fine ฉันจะไม่ถามแล้ว...",
+            "ล้อเล่นนะ ตอบตกลงเถอะนะ! ❤️"
+        ];
+
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            const noButton = document.querySelector('.no-btn');
+            const yesButton = document.querySelector('.yes-btn');
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+        }
+
+        function startCountdown() {
+            document.getElementById("valentinePage").classList.add("hidden");
+            document.getElementById("countdownPage").classList.remove("hidden");
+            
+            let countdown = 1;
+            let countdownElement = document.getElementById("countdown");
+            let interval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                if (countdown === 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdownPage").classList.add("hidden");
+                    document.getElementById("memoryPage").classList.remove("hidden");
+                }
+            }, 1000);
+        }
+
+        function goToMenu() {
+            document.getElementById("memoryPage").classList.add("hidden");
+            document.getElementById("menuPage").classList.remove("hidden");
+        }
+
+        function goToEnd() {
+            document.getElementById("memoryPage").classList.add("hidden");
+            document.getElementById("endPage").classList.remove("hidden");
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("background-music");
+        audio.volume = 0.4; // ปรับเสียงเบาๆ (ค่า 0.0 - 1.0)
+    });
+    </script>
+     <script src="script.js"></script>
+</body>
+</html>
